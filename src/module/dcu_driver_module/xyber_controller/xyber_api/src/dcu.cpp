@@ -6,7 +6,7 @@
  */
 
 #include "internal/dcu.h"
-
+#include <iostream>
 #include <cstring>
 #include <typeinfo>
 
@@ -19,7 +19,7 @@
 
 using namespace ethercat_manager;
 using namespace std::chrono_literals;
-
+using namespace std;
 namespace xyber {
 
 Dcu::Dcu(std::string name, int32_t ecat_id) : EthercatNode(ecat_id), name_(name) {
@@ -114,7 +114,7 @@ bool Dcu::EnableActuator(const std::string& name) {
 
   if (actr->GetType() == ActuatorType::POWER_FLOW_L28 ||
       actr->GetType() == ActuatorType::OMNI_PICKER) {
-    return true;
+    return true;//夹爪和直线电机上电自动使能
   }
 
   {
@@ -307,7 +307,6 @@ void Dcu::SetMitCmd(const std::string& name, float pos, float vel, float effort,
                     float kd) {
   auto actr = GetActautor(name);
   if (!actr) return;
-
   std::lock_guard<std::mutex> lock(send_mtx_);
   actr->SetMitCmd(pos, vel, effort, kp, kd);
   SetChannelId(actr->GetCtrlChannel(), CHANNEL_BROADCAST_ID);

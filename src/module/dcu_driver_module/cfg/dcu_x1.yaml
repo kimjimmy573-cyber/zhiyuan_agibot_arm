@@ -1,4 +1,4 @@
-publish_frequecy: 1000.0      # 数据发布频率
+publish_frequecy: 100.0      # 数据发布频率
 imu_dcu_name: hip             # IMU数据来源，下肢DCU
 enable_actuator: true         # 使能所有执行器
 actuator_debug: true         # 发布所有执行器的调试数据
@@ -82,7 +82,8 @@ ethercat:
   bind_cpu: 9             # 绑定CPU核心
   rt_priority: 90         # 线程优先级
   enable_dc: true         # 使能DC同步
-  cycle_time_ns: 1000000  # 刷新周期1ms - 1khz
+  cycle_time_ns: 10000000  # 刷新周期10ms - 100hz 频率太高会导致dcu卡死，降低频率使得机器人控制时长大幅提升，
+                           # 但是左臂dcu在运行5min后还是会卡死，需要重新启动，后续可能还要继续降低频率
 
 dcu_network:              # DCU通信网络，请根据实机连接情况配置
   - name: body            # DCU索引名字

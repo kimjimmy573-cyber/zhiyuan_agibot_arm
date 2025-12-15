@@ -18,9 +18,9 @@
 #include "internal/omni_picker.h"
 #include "internal/power_flow.h"
 #include "internal/version.h"
-
+#include <iostream>
 using namespace ethercat_manager;
-
+using namespace std;
 namespace xyber {
 
 // global hidden variable
@@ -249,7 +249,6 @@ void XyberController::SetMitCmd(const std::string& name, float pos, float vel, f
                                 float kp, float kd) {
   auto it = actuator_dcu_map_.find(name);
   if (it == actuator_dcu_map_.end()) return;
-
   return it->second->SetMitCmd(name, pos, vel, effort, kp, kd);
 }
 

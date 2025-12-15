@@ -35,7 +35,7 @@ bool JoyStickModule::Initialize(aimrt::CoreRef core) {
           publisher.topic_name = pub["topic_name"].as<std::string>();
           publisher.buttons = pub["buttons"].as<std::vector<uint8_t>>();
           publisher.pub = core_.GetChannelHandle().GetPublisher(publisher.topic_name);
-          aimrt::channel::RegisterPublishType<std_msgs::msg::Float32>(publisher.pub);
+          aimrt::channel::RegisterPublishType<std_msgs::msg::Float32>(publisher.pub); 
           float_pubs_.push_back(std::move(publisher));
         }
       }
@@ -109,7 +109,8 @@ void JoyStickModule::MainLoop() {
         ret &= joy_data.buttons[button];
       }
       if (ret) {
-        aimrt::channel::Publish<std_msgs::msg::Float32>(float_pub.pub, button_msgs);
+
+        aimrt::channel::Publish<std_msgs::msg::Float32>(float_pub.pub, button_msgs);//按钮按下后，发布float类型消息到配置topic
       }
     }
 
@@ -147,7 +148,7 @@ void JoyStickModule::MainLoop() {
           vel_msgs.angular.z = joy_data.axis[twist_pub.axis["angular-z"]];
           target_pos[idx++] = joy_data.axis[twist_pub.axis["angular-z"]];
         }
-        aimrt::channel::Publish<geometry_msgs::msg::Twist>(twist_pub.pub, vel_msgs);
+        aimrt::channel::Publish<geometry_msgs::msg::Twist>(twist_pub.pub, vel_msgs);//按钮按下后，发布Twist类型消息到配置topic
 
         array_t state = limiter_->update(target_pos);
         idx = 0;

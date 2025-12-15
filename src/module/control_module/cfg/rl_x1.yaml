@@ -1,4 +1,4 @@
-control_frequecy: 1000
+control_frequecy: 100
 use_sim_handles: False
 
 sub_joy_vel_name: /cmd_vel_limiter      # controller 接收的运动指令
@@ -88,6 +88,8 @@ joint_list:
   - right_knee_pitch_joint
   - right_ankle_pitch_joint
   - right_ankle_roll_joint
+  - left_claw_joint    
+  - right_claw_joint   
 # ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 
 # ↓↓↓↓↓↓↓↓↓↓↓ 针对执行器标零后的真机装配偏移量，对与URDF不一致的关节进行补偿 ↓↓↓↓↓↓↓↓↓↓↓↓↓
@@ -121,6 +123,8 @@ joint_offset:
   right_knee_pitch_joint: 0.0
   right_ankle_pitch_joint: 0.0
   right_ankle_roll_joint: 0.0
+  left_claw_joint: 0.0   
+  right_claw_joint: 0.0  
 # ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 
 
@@ -132,69 +136,91 @@ controllers:
                 left_shoulder_pitch_joint, left_shoulder_roll_joint, left_shoulder_yaw_joint, left_elbow_pitch_joint, left_elbow_yaw_joint, left_wrist_pitch_joint, left_wrist_roll_joint, 
                 right_shoulder_pitch_joint, right_shoulder_roll_joint, right_shoulder_yaw_joint, right_elbow_pitch_joint, right_elbow_yaw_joint, right_wrist_pitch_joint, right_wrist_roll_joint, 
                 left_hip_pitch_joint, left_hip_roll_joint, left_hip_yaw_joint, left_knee_pitch_joint, left_ankle_pitch_joint, left_ankle_roll_joint, 
-                right_hip_pitch_joint, right_hip_roll_joint, right_hip_yaw_joint, right_knee_pitch_joint, right_ankle_pitch_joint, right_ankle_roll_joint]
+                right_hip_pitch_joint, right_hip_roll_joint, right_hip_yaw_joint, right_knee_pitch_joint, right_ankle_pitch_joint, right_ankle_roll_joint,
+                left_claw_joint, right_claw_joint]
     init_state: [0.0, 0.0, 0.0,
                  0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
                  0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
                  0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-                 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+                 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+                 0.0, 0.0]
+
     stiffness:  [0.0, 0.0, 0.0,
                  0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
                  0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
                  0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-                 0.0, 0.0, 0.0, 0.0, 0.0]
+                 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+                 0.0, 0.0]
+
     damping:    [0.0, 0.0, 0.0,
                  0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
                  0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
                  0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-                 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+                 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+                 0.0, 0.0]
 
   # keep
   pd_keep:
+
     joint_list: [lumbar_yaw_joint, lumbar_roll_joint, lumbar_pitch_joint, 
                 left_shoulder_pitch_joint, left_shoulder_roll_joint, left_shoulder_yaw_joint, left_elbow_pitch_joint, left_elbow_yaw_joint, left_wrist_pitch_joint, left_wrist_roll_joint, 
                 right_shoulder_pitch_joint, right_shoulder_roll_joint, right_shoulder_yaw_joint, right_elbow_pitch_joint, right_elbow_yaw_joint, right_wrist_pitch_joint, right_wrist_roll_joint, 
                 left_hip_pitch_joint, left_hip_roll_joint, left_hip_yaw_joint, left_knee_pitch_joint, left_ankle_pitch_joint, left_ankle_roll_joint, 
-                right_hip_pitch_joint, right_hip_roll_joint, right_hip_yaw_joint, right_knee_pitch_joint, right_ankle_pitch_joint, right_ankle_roll_joint]
+                right_hip_pitch_joint, right_hip_roll_joint, right_hip_yaw_joint, right_knee_pitch_joint, right_ankle_pitch_joint, right_ankle_roll_joint,
+                left_claw_joint, right_claw_joint]
+
     init_state: [0.0,   0.0,   0.0,   
                  0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,
                  0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,
                  0.0,   0.0,   0.0,   0.0,   0.0,   0.0,
-                 0.0,   0.0,   0.0,   0.0,   0.0,   0.0]
+                 0.0,   0.0,   0.0,   0.0,   0.0,   0.0,
+                 0.0,   0.0]
+
     stiffness:  [500.0, 500.0, 500.0,
                  80.0,  80.0,  80.0,  80.0,  80.0,  80.0, 80.0, 
                  80.0,  80.0,  80.0,  80.0,  80.0,  80.0, 80.0, 
                  300.0, 300.0, 300.0, 300.0, 300.0, 300.0, 
-                 300.0, 300.0, 300.0, 300.0, 300.0, 300.0]
+                 300.0, 300.0, 300.0, 300.0, 300.0, 300.0,
+                 80.0,  80.0]
+
     damping:    [5.0,   5.0,   5.0,
                  1.5,   1.5,   1.5,  1.5, 1.5, 1.5, 1.5,
                  1.5,   1.5,   1.5,  1.5, 1.5, 1.5, 1.5,
                  5.0,   5.0,   5.0,  5.0, 5.0, 5.0,
-                 5.0,   5.0,   5.0,  5.0, 5.0, 5.0]
+                 5.0,   5.0,   5.0,  5.0, 5.0, 5.0,
+                 1.5,   1.5]
     is_keep_controller: True  # keep控制器标志
 
   # zero
   pd_zero:
+    # [修改] 加入夹爪
     joint_list: [lumbar_yaw_joint, lumbar_roll_joint, lumbar_pitch_joint, 
                 left_shoulder_pitch_joint, left_shoulder_roll_joint, left_shoulder_yaw_joint, left_elbow_pitch_joint, left_elbow_yaw_joint, left_wrist_pitch_joint, left_wrist_roll_joint, 
                 right_shoulder_pitch_joint, right_shoulder_roll_joint, right_shoulder_yaw_joint, right_elbow_pitch_joint, right_elbow_yaw_joint, right_wrist_pitch_joint, right_wrist_roll_joint, 
                 left_hip_pitch_joint, left_hip_roll_joint, left_hip_yaw_joint, left_knee_pitch_joint, left_ankle_pitch_joint, left_ankle_roll_joint, 
-                right_hip_pitch_joint, right_hip_roll_joint, right_hip_yaw_joint, right_knee_pitch_joint, right_ankle_pitch_joint, right_ankle_roll_joint]
+                right_hip_pitch_joint, right_hip_roll_joint, right_hip_yaw_joint, right_knee_pitch_joint, right_ankle_pitch_joint, right_ankle_roll_joint,
+                left_claw_joint, right_claw_joint]
+    # [修改] init_state 补两个 0.0
     init_state: [0.0,   0.0,   0.0,
                  0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,
                  0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,
                  0.0,   0.0,   0.0,   0.0,   0.0,   0.0,
-                 0.0,   0.0,   0.0,   0.0,   0.0,   0.0]
+                 0.0,   0.0,   0.0,   0.0,   0.0,   0.0,
+                 0.0,   0.0]
+    # [修改] stiffness 补两个 80.0
     stiffness:  [500.0, 500.0, 500.0, 
                  80.0,  80.0,  80.0,  80.0,  80.0,  80.0,  80.0,
                  80.0,  80.0,  80.0,  80.0,  80.0,  80.0,  80.0,
                  300.0, 300.0, 300.0, 300.0, 300.0, 300.0,
-                 300.0, 300.0, 300.0, 300.0, 300.0, 300.0]
+                 300.0, 300.0, 300.0, 300.0, 300.0, 300.0,
+                 80.0,  80.0]
+    # [修改] damping 补两个 1.5
     damping:    [5.0,   5.0,   5.0,
                  1.5,   1.5,   1.5,   1.5,   1.5,   1.5,   1.5,
                  1.5,   1.5,   1.5,   1.5,   1.5,   1.5,   1.5,
                  5.0,   5.0,   5.0,   5.0,   5.0,   5.0,
-                 5.0,   5.0,   5.0,   5.0,   5.0,   5.0]
+                 5.0,   5.0,   5.0,   5.0,   5.0,   5.0,
+                 1.5,   1.5]
 
   # stand
   pd_stand:
@@ -215,7 +241,7 @@ controllers:
                  5.0,   5.0,   5.0,   5.0,   5.0,
                  5.0,   5.0,   5.0,   5.0,   5.0  ]
 
-  # plan
+  # plan 实际不启用
   pd_plan:
     joint_list: [right_shoulder_pitch_joint, right_shoulder_yaw_joint, right_elbow_pitch_joint]
     init_state: [0.0,   0.0,  0.0]
@@ -306,4 +332,3 @@ controllers:
         - left_ankle_roll_joint
         - right_ankle_pitch_joint
         - right_ankle_roll_joint
-# ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑

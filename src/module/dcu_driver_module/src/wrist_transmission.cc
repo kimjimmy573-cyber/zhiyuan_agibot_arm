@@ -43,6 +43,7 @@ void LeftWristParallelTransmission::TransformActuatorToJoint() {
   joint_roll_.handle->state.position = qm6;
   joint_roll_.handle->state.velocity = qdm6;
   joint_roll_.handle->state.effort = taum6;
+ //printf("TransformActuatorToJoint: \n");
 }
 
 void LeftWristParallelTransmission::TransformJointToActuator() {
@@ -69,6 +70,8 @@ void LeftWristParallelTransmission::TransformJointToActuator() {
   actr_left_.handle->cmd.effort = tau6Des * actr_left_.direction;
   actr_left_.handle->cmd.kp = joint_roll_.handle->cmd.kp;
   actr_left_.handle->cmd.kd = joint_roll_.handle->cmd.kd;
+  // printf("TransformJointToActuator: \n");
+
 }
 
 RightWristParallelTransmission::RightWristParallelTransmission(
@@ -100,6 +103,8 @@ void RightWristParallelTransmission::TransformActuatorToJoint() {
   joint_roll_.handle->state.position = qm6;
   joint_roll_.handle->state.velocity = qdm6;
   joint_roll_.handle->state.effort = taum6;
+ // printf("TransformActuatorToJoint: \n");
+
 }
 
 void RightWristParallelTransmission::TransformJointToActuator() {
@@ -126,6 +131,7 @@ void RightWristParallelTransmission::TransformJointToActuator() {
   actr_left_.handle->cmd.effort = tau6Des * actr_left_.direction;
   actr_left_.handle->cmd.kp = joint_roll_.handle->cmd.kp;
   actr_left_.handle->cmd.kd = joint_roll_.handle->cmd.kd;
+  //printf("TransformJointToActuator: \n");
 }
 
 }  // namespace xyber_x1_infer::dcu_driver_module
